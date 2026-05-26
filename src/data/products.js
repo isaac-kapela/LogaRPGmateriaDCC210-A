@@ -1,0 +1,263 @@
+// número do whatsapp (55 + ddd + número)
+export const WHATSAPP_NUMBER = "553291126624";
+
+export const CATEGORY_LABELS = {
+  dados:      "Dados",
+  livros:     "Livros",
+  miniaturas: "Miniaturas",
+  acessorios: "Acessórios",
+};
+
+export const FILTERS = [
+  { value: "all",        label: "Todos",       icon: "⚔" },
+  { value: "dados",      label: "Dados",       icon: "🎲" },
+  { value: "livros",     label: "Livros",      icon: "📚" },
+  { value: "miniaturas", label: "Miniaturas",  icon: "🗡" },
+  { value: "acessorios", label: "Acessórios",  icon: "🎭" },
+];
+
+export const SORT_OPTIONS = [
+  { value: "popular", label: "Mais populares" },
+  { value: "price-asc", label: "Menor preço" },
+  { value: "price-desc", label: "Maior preço" },
+  { value: "rating", label: "Melhor avaliado" },
+  { value: "newest", label: "Mais recentes" },
+];
+
+// status possíveis: "novo" | "classico" | "favorito" | "mais-vendido" | null
+export const products = [
+  {
+    id: 1,
+    name: "Set de Dados Metálicos — Dragão",
+    description:
+      "7 dados poliedros em liga de zinco com acabamento cromado. Gravuras de dragão em relevo. Inclui estojo de couro sintético.",
+    category: "dados",
+    price: 89.9,
+    icon: "🎲",
+    specs: ["7 peças", "Liga de zinco", "Estojo incluso", "D4 ao D20"],
+    isNew: true,
+    status: "mais-vendido",
+    rating: 4.7,
+    reviewCount: 234,
+  },
+  {
+    id: 2,
+    name: "Set de Dados de Resina Mágica",
+    description:
+      "Dados artesanais em resina translúcida com inclusões douradas. Cada peça é única, produzida à mão.",
+    category: "dados",
+    price: 49.9,
+    icon: "✨",
+    specs: ["7 peças", "Resina artesanal", "Cores variadas", "D4 ao D20"],
+    isNew: false,
+    status: "favorito",
+    rating: 4.5,
+    reviewCount: 189,
+  },
+  {
+    id: 3,
+    name: "Dados de Pedra Natural",
+    description:
+      "Set exclusivo esculpido em pedra natural. Acabamento polido, peso equilibrado. Disponível em obsidiana, mármore e ágata.",
+    category: "dados",
+    price: 129.9,
+    icon: "🪨",
+    specs: ["7 peças", "Pedra natural", "Peso premium", "Escolha a pedra"],
+    isNew: false,
+    status: null,
+    rating: 4.8,
+    reviewCount: 76,
+  },
+  {
+    id: 4,
+    name: "Set de D6 para Wargame (36 un)",
+    description:
+      "Dados de seis faces em plástico de alta qualidade, ideais para jogos de estratégia e wargames.",
+    category: "dados",
+    price: 39.9,
+    icon: "🎯",
+    specs: ["36 peças", "Plástico rígido", "D6 apenas", "Cores à escolha"],
+    isNew: false,
+    status: null,
+    rating: 4.2,
+    reviewCount: 312,
+  },
+
+  {
+    id: 5,
+    name: "Livro do Jogador — D&D 5ª Ed.",
+    description:
+      "O guia essencial para jogadores de Dungeons & Dragons. Contém todas as regras de criação de personagem, classes, raças e magias.",
+    category: "livros",
+    price: 199.9,
+    icon: "📖",
+    specs: ["316 páginas", "Capa dura", "PT-BR", "5ª edição"],
+    isNew: false,
+    status: "classico",
+    rating: 4.9,
+    reviewCount: 412,
+  },
+  {
+    id: 6,
+    name: "Manual dos Monstros",
+    description:
+      "Mais de 300 criaturas detalhadas para o Dungeon Master popular suas aventuras. Ilustrações épicas em cada página.",
+    category: "livros",
+    price: 189.9,
+    icon: "👹",
+    specs: ["352 páginas", "Capa dura", "PT-BR", "5ª edição"],
+    isNew: false,
+    status: "classico",
+    rating: 4.8,
+    reviewCount: 287,
+  },
+  {
+    id: 7,
+    name: "Aventura: A Maldição do Castelo",
+    description:
+      "Aventura completa para 4-6 jogadores de nível 1 a 10. Inclui mapas, fichas de PNJ e tokens para impressão.",
+    category: "livros",
+    price: 79.9,
+    icon: "🏰",
+    specs: ["96 páginas", "Brochura", "PT-BR", "Nível 1-10"],
+    isNew: true,
+    status: "novo",
+    rating: 4.6,
+    reviewCount: 98,
+  },
+  {
+    id: 8,
+    name: "Guia do Mestre",
+    description:
+      "O guia definitivo para Dungeon Masters. Regras avançadas, criação de mundos, NPCs e tesouros aleatórios.",
+    category: "livros",
+    price: 199.9,
+    icon: "📚",
+    specs: ["320 páginas", "Capa dura", "PT-BR", "5ª edição"],
+    isNew: false,
+    status: null,
+    rating: 4.7,
+    reviewCount: 203,
+  },
+
+  {
+    id: 9,
+    name: "Miniatura Dragão Vermelho",
+    description:
+      "Miniatura em resina de alta resolução. Detalhes incríveis, escama por escama. Base de 150mm inclusa. Não pintada.",
+    category: "miniaturas",
+    price: 149.9,
+    icon: "🐉",
+    specs: ["Resina", "Base 150mm", "Não pintada", "Escala 28mm"],
+    isNew: true,
+    status: "novo",
+    rating: 4.9,
+    reviewCount: 567,
+  },
+  {
+    id: 10,
+    name: "Pack Guerreiros (10 miniaturas)",
+    description:
+      "Dez miniaturas de guerreiros variados em plástico rígido. Perfeitas para combates em massa e campanhas longas.",
+    category: "miniaturas",
+    price: 89.9,
+    icon: "⚔",
+    specs: ["10 peças", "Plástico", "Não pintadas", "Escala 28mm"],
+    isNew: false,
+    status: "mais-vendido",
+    rating: 4.4,
+    reviewCount: 421,
+  },
+  {
+    id: 11,
+    name: "Beholder — Resina Pintada",
+    description:
+      "Miniatura do clássico Beholder pintada à mão por artista especializado. Detalhes profissionais com sombreamento e iluminação.",
+    category: "miniaturas",
+    price: 249.9,
+    icon: "👁",
+    specs: ["Resina", "Pintada à mão", "Base inclusa", "Escala 28mm"],
+    isNew: false,
+    status: "favorito",
+    rating: 5.0,
+    reviewCount: 142,
+  },
+  {
+    id: 12,
+    name: "Liche Necromante",
+    description:
+      "Miniatura detalhada do temível Liche em resina de alta resolução. Manto esvoaçante e cajado com caveira.",
+    category: "miniaturas",
+    price: 79.9,
+    icon: "💀",
+    specs: ["Resina", "Não pintada", "Base 32mm", "Escala 28mm"],
+    isNew: false,
+    status: null,
+    rating: 4.5,
+    reviewCount: 88,
+  },
+
+  {
+    id: 13,
+    name: "Tapete de Batalha Neoprene 90×60",
+    description:
+      "Tapete de neoprene antiderrapante com grid quadriculado. Superfície macia, não risca a mesa. Enrola fácil para transporte.",
+    category: "acessorios",
+    price: 159.9,
+    icon: "🗺",
+    specs: ["90 × 60 cm", "Neoprene 3mm", "Grid 2,5cm", "Antiderrapante"],
+    isNew: false,
+    status: "favorito",
+    rating: 4.8,
+    reviewCount: 315,
+  },
+  {
+    id: 14,
+    name: "Fichas de Personagem (pad 50 fls)",
+    description:
+      "Bloco com 50 folhas de fichas de personagem oficial de D&D 5ª edição. Papel de qualidade, tinta resistente.",
+    category: "acessorios",
+    price: 29.9,
+    icon: "📋",
+    specs: ["50 folhas", "A4", "D&D 5ª Ed.", "Papel 90g"],
+    isNew: false,
+    status: null,
+    rating: 4.3,
+    reviewCount: 156,
+  },
+  {
+    id: 15,
+    name: "Kit de Tokens de Iniciativa (30 un)",
+    description:
+      "Tokens acrílicos numerados para controle de iniciativa e status em combate. Inclui suportes de mesa.",
+    category: "acessorios",
+    price: 39.9,
+    icon: "🎭",
+    specs: ["30 tokens", "Acrílico 3mm", "Numerados", "Suportes inclusos"],
+    isNew: true,
+    status: "novo",
+    rating: 4.6,
+    reviewCount: 67,
+  },
+  {
+    id: 16,
+    name: "Mapa Dungeon Grid Hexagonal",
+    description:
+      "Mapa reutilizável em PVC com impressão de grade hexagonal. Pode ser usado com marcadores apagáveis.",
+    category: "acessorios",
+    price: 69.9,
+    icon: "🏔",
+    specs: ["60 × 45 cm", "PVC flexível", "Grid hex", "Reutilizável"],
+    isNew: false,
+    status: null,
+    rating: 4.4,
+    reviewCount: 124,
+  },
+];
+
+export const STATUS_LABELS = {
+  novo: "Novo",
+  classico: "Clássico",
+  favorito: "Favorito",
+  "mais-vendido": "Mais Vendido",
+};
