@@ -1,24 +1,22 @@
-import { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Hero from './components/Hero';
-import ProductsSection from './components/ProductsSection';
-import ProductModal from './components/ProductModal';
-import About from './components/About';
 import Footer from './components/Footer';
+import HomePage from './pages/HomePage';
+import ProductPage from './pages/ProductPage';
+import PromotionsPage from './pages/PromotionsPage';
 
 export default function App() {
-  const [selectedProduct, setSelectedProduct] = useState(null);
-
   return (
-    <>
+    <BrowserRouter>
       <Header />
       <main>
-        <Hero />
-        <ProductsSection onOpenModal={setSelectedProduct} />
-        <About />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/produto/:id" element={<ProductPage />} />
+          <Route path="/promocoes" element={<PromotionsPage />} />
+        </Routes>
       </main>
       <Footer />
-      <ProductModal product={selectedProduct} onClose={() => setSelectedProduct(null)} />
-    </>
+    </BrowserRouter>
   );
 }

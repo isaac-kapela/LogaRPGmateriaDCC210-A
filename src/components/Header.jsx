@@ -1,8 +1,10 @@
 import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
@@ -12,21 +14,30 @@ export default function Header() {
 
   const closeMenu = () => setMenuOpen(false);
 
+  const isHome = location.pathname === '/';
+  const isPromos = location.pathname === '/promocoes';
+
   return (
     <>
       <header className={`header${scrolled ? ' scrolled' : ''}`} id="header">
         <div className="container header-inner">
-          <a href="#" className="logo">
+          <Link to="/" className="logo">
             <span className="logo-icon" aria-hidden="true">⚔</span>
             <span className="logo-text">
               FORJA<span className="logo-accent">RPG</span>
             </span>
-          </a>
+          </Link>
 
           <nav className="nav">
-            <a href="#" className="nav-link active">Início</a>
-            <a href="#produtos" className="nav-link">Loja</a>
-            <a href="#promocoes" className="nav-link">Promoções</a>
+            <Link to="/" className={`nav-link${isHome && !isPromos ? ' active' : ''}`}>Início</Link>
+            <Link to="/#produtos" className="nav-link" onClick={() => {
+              if (isHome) {
+                setTimeout(() => {
+                  document.getElementById('produtos')?.scrollIntoView({ behavior: 'smooth' });
+                }, 50);
+              }
+            }}>Loja</Link>
+            <Link to="/promocoes" className={`nav-link${isPromos ? ' active' : ''}`}>Promoções</Link>
           </nav>
 
           <div className="header-actions">
@@ -63,9 +74,9 @@ export default function Header() {
       </header>
 
       <div className={`mobile-nav${menuOpen ? ' open' : ''}`}>
-        <a href="#" className="mobile-nav-link" onClick={closeMenu}>Início</a>
-        <a href="#produtos" className="mobile-nav-link" onClick={closeMenu}>Loja</a>
-        <a href="#promocoes" className="mobile-nav-link" onClick={closeMenu}>Promoções</a>
+        <Link to="/" className="mobile-nav-link" onClick={closeMenu}>Início</Link>
+        <Link to="/#produtos" className="mobile-nav-link" onClick={closeMenu}>Loja</Link>
+        <Link to="/promocoes" className="mobile-nav-link" onClick={closeMenu}>Promoções</Link>
       </div>
     </>
   );

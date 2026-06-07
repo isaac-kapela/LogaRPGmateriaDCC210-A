@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { products, FILTERS, SORT_OPTIONS } from '../data/products';
 import ProductCard from './ProductCard';
 
-export default function ProductsSection({ onOpenModal }) {
+export default function ProductsSection() {
   const [activeFilter, setActiveFilter] = useState('all');
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('popular');
@@ -99,7 +99,6 @@ export default function ProductsSection({ onOpenModal }) {
               <ProductCard
                 key={product.id}
                 product={product}
-                onOpenModal={onOpenModal}
               />
             ))}
           </div>
