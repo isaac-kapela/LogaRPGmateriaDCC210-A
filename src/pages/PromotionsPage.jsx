@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { products, FILTERS, PROMO_SORT_OPTIONS, CATEGORY_LABELS, STATUS_LABELS } from '../data/products';
+import { products, FILTERS, PROMO_SORT_OPTIONS, CATEGORY_LABELS } from '../data/products';
 import { formatPrice } from '../utils/whatsapp';
 import StarRating from '../components/StarRating';
 

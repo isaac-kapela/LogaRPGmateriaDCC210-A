@@ -1,16 +1,31 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { products, FILTERS, SORT_OPTIONS } from '../data/products';
 import ProductCard from './ProductCard';
 
 export default function ProductsSection() {
-  const [activeFilter, setActiveFilter] = useState('all');
+  const [searchParams] = useSearchParams();
+  const initialCat = searchParams.get('cat') ?? 'all';
+
+  const [activeFilter, setActiveFilter] = useState(initialCat);
   const [search, setSearch] = useState('');
   const [sort, setSort] = useState('popular');
 
+  useEffect(() => {
+    const cat = searchParams.get('cat') ?? 'all';
+    setActiveFilter(cat);
+  }, [searchParams]);
+
   const filtered = useMemo(() => {
-    let list = activeFilter === 'all'
-      ? products
-      : products.filter((p) => p.category === activeFilter);
+    const matFilters = ['Resina', 'Metal', 'Madeira', 'Pedra', 'Plástico'];
+    let list;
+    if (activeFilter === 'all') {
+      list = products;
+    } else if (matFilters.includes(activeFilter)) {
+      list = products.filter((p) => p.material === activeFilter);
+    } else {
+      list = products.filter((p) => p.category === activeFilter);
+    }
 
     if (search.trim()) {
       const q = search.trim().toLowerCase();
@@ -96,16 +111,11 @@ export default function ProductsSection() {
         {filtered.length > 0 ? (
           <div className="products-grid">
             {filtered.map((product) => (
-              <ProductCard
-                key={product.id}
-                product={product}
-              />
+              <ProductCard key={product.id} product={product} />
             ))}
           </div>
         ) : (
-          <p className="products-empty">
-            Nenhum produto encontrado.
-          </p>
+          <p className="products-empty">Nenhum produto encontrado.</p>
         )}
       </div>
     </section>

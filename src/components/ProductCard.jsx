@@ -1,10 +1,15 @@
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CATEGORY_LABELS, STATUS_LABELS } from '../data/products';
 import { formatPrice } from '../utils/whatsapp';
+import { useCart } from '../context/CartContext';
 import StarRating from './StarRating';
 
 export default function ProductCard({ product }) {
   const navigate = useNavigate();
+  const { add } = useCart();
+  const [added, setAdded] = useState(false);
+
   const categoryLabel = CATEGORY_LABELS[product.category] ?? product.category;
   const statusLabel = product.status ? STATUS_LABELS[product.status] : null;
   const hasDiscount = product.originalPrice != null;
@@ -13,6 +18,13 @@ export default function ProductCard({ product }) {
     : 0;
 
   const goToProduct = () => navigate(`/produto/${product.id}`);
+
+  const handleAdd = (e) => {
+    e.stopPropagation();
+    add(product);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1200);
+  };
 
   return (
     <article
@@ -23,8 +35,11 @@ export default function ProductCard({ product }) {
       onKeyDown={(e) => e.key === 'Enter' && goToProduct()}
       aria-label={`Ver detalhes de ${product.name}`}
     >
-      <div className={`product-image cat-${product.category}`}>
-        <span className="product-image-icon">{product.icon}</span>
+      <div className={`product-image cat-${product.category}${product.image ? ' product-image-photo' : ''}`}>
+        {product.image
+          ? <img src={product.image} alt={product.name} className="product-photo" />
+          : <span className="product-image-icon">{product.icon}</span>
+        }
         {statusLabel && (
           <span className="product-status-badge">{statusLabel}</span>
         )}
@@ -47,14 +62,11 @@ export default function ProductCard({ product }) {
             <span className="product-price">{formatPrice(product.price)}</span>
           </div>
           <button
-            className="product-add-btn"
-            onClick={(e) => {
-              e.stopPropagation();
-              goToProduct();
-            }}
-            aria-label={`Ver ${product.name}`}
+            className={`product-add-btn${added ? ' product-add-btn--added' : ''}`}
+            onClick={handleAdd}
+            aria-label={`Adicionar ${product.name} ao carrinho`}
           >
-            +
+            {added ? '✓' : '+'}
           </button>
         </div>
       </div>
