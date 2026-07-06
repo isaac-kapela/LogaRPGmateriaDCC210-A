@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { products, CATEGORY_LABELS, STATUS_LABELS } from '../data/products';
-import { formatPrice, buildWhatsAppLink } from '../utils/whatsapp';
+import { formatPrice } from '../utils/whatsapp';
 import StarRating from '../components/StarRating';
-import WhatsAppIcon from '../components/icons/WhatsAppIcon';
+import PixModal, { generatePixKey } from '../components/PixModal';
 
 const THUMB_TINTS = [
   'rgba(212,160,23,.15)',
@@ -18,6 +18,7 @@ export default function ProductPage() {
   const product = products.find((p) => p.id === Number(id));
   const [qty, setQty] = useState(1);
   const [activeThumb, setActiveThumb] = useState(0);
+  const [pixKey, setPixKey] = useState(null);
 
   if (!product) {
     return (
@@ -36,7 +37,6 @@ export default function ProductPage() {
     : 0;
   const installment = (product.price / 12).toFixed(2).replace('.', ',');
 
-  const whatsappLink = buildWhatsAppLink(product);
 
   return (
     <div className="product-page">
@@ -134,26 +134,23 @@ export default function ProductPage() {
             </div>
 
             <div className="pp-actions">
-              <a
-                href={whatsappLink}
+              <button
+                type="button"
                 className="pp-btn-cart"
-                target="_blank"
-                rel="noopener noreferrer"
+                onClick={() => setPixKey(generatePixKey())}
               >
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                  <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
-                  <path d="M1 1h4l2.7 13.4a2 2 0 0 0 2 1.6h9.7a2 2 0 0 0 2-1.6L23 6H6" />
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2 2 12l10 10 10-10L12 2Zm0 3.17L18.83 12 12 18.83 5.17 12 12 5.17Z"/>
                 </svg>
-                ADICIONAR AO CARRINHO
-              </a>
-              <a
-                href={whatsappLink}
-                className="pp-btn-buy"
-                target="_blank"
-                rel="noopener noreferrer"
+                PAGAR COM PIX
+              </button>
+              <button
+                type="button"
+                className="pp-btn-buy btn-pix"
+                onClick={() => setPixKey(generatePixKey())}
               >
                 COMPRAR AGORA
-              </a>
+              </button>
             </div>
 
             <div className="pp-trust">
@@ -200,6 +197,14 @@ export default function ProductPage() {
           </div>
         </section>
       </div>
+
+      {pixKey && (
+        <PixModal
+          pixKey={pixKey}
+          total={formatPrice(product.price * qty)}
+          onClose={() => setPixKey(null)}
+        />
+      )}
     </div>
   );
 }

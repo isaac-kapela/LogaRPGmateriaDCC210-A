@@ -1,11 +1,12 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { CATEGORY_LABELS } from '../data/products';
-import { formatPrice, buildWhatsAppLink } from '../utils/whatsapp';
-import WhatsAppIcon from './icons/WhatsAppIcon';
+import { formatPrice } from '../utils/whatsapp';
 import StarRating from './StarRating';
+import PixModal, { generatePixKey } from './PixModal';
 
 export default function ProductModal({ product, onClose }) {
   const isOpen = product !== null;
+  const [pixKey, setPixKey] = useState(null);
 
   // Fecha com ESC e trava o scroll do body
   useEffect(() => {
@@ -67,21 +68,29 @@ export default function ProductModal({ product, onClose }) {
           <div className="modal-price-row">
             <div>
               <p className="modal-price">{formatPrice(product.price)}</p>
-              <p className="modal-price-label">Preço via WhatsApp</p>
+              <p className="modal-price-label">Pagamento via Pix</p>
             </div>
-            <a
-              href={buildWhatsAppLink(product)}
-              className="modal-buy-btn"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Comprar via WhatsApp"
+            <button
+              type="button"
+              className="modal-buy-btn btn-pix"
+              onClick={() => setPixKey(generatePixKey())}
             >
-              <WhatsAppIcon size={18} />
-              Comprar via WhatsApp
-            </a>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2 2 12l10 10 10-10L12 2Zm0 3.17L18.83 12 12 18.83 5.17 12 12 5.17Z"/>
+              </svg>
+              Comprar com Pix
+            </button>
           </div>
         </div>
       </div>
+
+      {pixKey && (
+        <PixModal
+          pixKey={pixKey}
+          total={formatPrice(product.price)}
+          onClose={() => setPixKey(null)}
+        />
+      )}
     </div>
   );
 }

@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Hero() {
   const particlesRef = useRef(null);
@@ -30,31 +31,46 @@ export default function Hero() {
       <div className="hero-bg" />
       <div className="hero-particles" ref={particlesRef} />
 
-      <div className="container">
+      <div className="container hero-container">
         <div className="hero-content">
           <p className="hero-eyebrow">
             <span className="star">★</span>
-            A Maior Loja RPG do Brasil
+            Especialistas em Dados para RPG
             <span className="star">★</span>
           </p>
 
           <h1 className="hero-title">
-            Forje sua
-            <span className="hero-title-accent">Lenda</span>
+            Role o Dado
+            <span className="hero-title-accent">Perfeito</span>
           </h1>
 
           <p className="hero-subtitle">
-            Dados, miniaturas, livros, escudos e muito mais. Tudo que você precisa
-            para aventuras épicas ao redor da mesa.
+            Kits temáticos em resina artesanal e metal sólido.
+            Conjuntos únicos para cada aventureiro, forjados para durar gerações.
           </p>
 
           <div className="hero-actions">
-            <a href="#produtos" className="btn btn-primary">
+            <Link to="/loja" className="btn btn-primary">
               Explorar Loja <span aria-hidden="true">→</span>
-            </a>
-            <a href="#promocoes" className="btn btn-outline">
-              Ver Promoções
-            </a>
+            </Link>
+            <Link to="/loja?mat=Resina" className="btn btn-outline">
+              Ver Resina
+            </Link>
+          </div>
+
+          <div className="hero-badges">
+            <span className="hero-badge">✨ Resina Artesanal</span>
+            <span className="hero-badge">⚙ Metal Sólido</span>
+          </div>
+        </div>
+
+        <div className="hero-visual" aria-hidden="true">
+          <div className="hero-dice-orbit">
+            <div className="hero-dice-main">🎲</div>
+            <div className="hero-dice-orbit-item hero-dice-orbit-1">✨</div>
+            <div className="hero-dice-orbit-item hero-dice-orbit-2">⚙</div>
+            <div className="hero-dice-orbit-item hero-dice-orbit-3">🔥</div>
+            <div className="hero-dice-orbit-item hero-dice-orbit-4">🛡</div>
           </div>
         </div>
       </div>
@@ -63,16 +79,16 @@ export default function Hero() {
 
       <div className="hero-stats">
         <div className="hero-stat">
-          <strong>500+</strong>
-          <span>Produtos</span>
+          <strong>4</strong>
+          <span>Kits Exclusivos</span>
+        </div>
+        <div className="hero-stat">
+          <strong>2</strong>
+          <span>Materiais</span>
         </div>
         <div className="hero-stat">
           <strong>12.000+</strong>
           <span>Clientes</span>
-        </div>
-        <div className="hero-stat">
-          <strong>∞</strong>
-          <span>Sessões Jogadas</span>
         </div>
         <div className="hero-stat">
           <strong>4.9 ★</strong>

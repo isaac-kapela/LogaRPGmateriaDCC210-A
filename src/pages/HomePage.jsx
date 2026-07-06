@@ -6,13 +6,9 @@ import { formatPrice } from '../utils/whatsapp';
 import { useCart } from '../context/CartContext';
 import StarRating from '../components/StarRating';
 
-const CATEGORIES = [
-  { key: 'dados', label: 'Resina',  icon: '✨', desc: 'Dados artesanais em resina' },
-  { key: 'dados', label: 'Metal',   icon: '⚙',  desc: 'Ligas de zinco e latão' },
-  { key: 'dados', label: 'Madeira', icon: '🪵', desc: 'Esculpidos à mão' },
-  { key: 'dados', label: 'Pedra',   icon: '🪨', desc: 'Obsidiana, mármore e mais' },
-  { key: 'dados', label: 'Plástico',icon: '🎯', desc: 'Acrílico e opções econômicas' },
-  { key: 'kits',  label: 'Kits',    icon: '🎁', desc: 'Conjuntos temáticos completos' },
+const MATERIALS = [
+  { mat: 'Resina', icon: '✨', desc: 'Dados artesanais, translúcidos e vibrantes', color: '#7b4fcf', query: '?mat=Resina' },
+  { mat: 'Metal',  icon: '⚙',  desc: 'Dados em liga de zinco e aço sólido',        color: '#7a8fa6', query: '?mat=Metal' },
 ];
 
 const featured    = products.filter((p) => p.isFeatured);
@@ -79,22 +75,23 @@ export default function HomePage() {
     <>
       <Hero />
 
-      {/* ── Categorias ── */}
-      <section className="home-categories">
+      {/* ── Materiais ── */}
+      <section className="home-categories" id="materiais">
         <div className="container">
-          <p className="home-section-eyebrow">NAVEGUE POR CATEGORIA</p>
-          <h2 className="home-section-title">Arsenal Completo</h2>
+          <p className="home-section-eyebrow">EXPLORE POR MATERIAL</p>
+          <h2 className="home-section-title">Cada Dado, uma História</h2>
           <div className="categories-grid">
-            {CATEGORIES.map((cat, i) => (
+            {MATERIALS.map((m) => (
               <Link
-                key={i}
-                to={`/loja?cat=${cat.key}`}
+                key={m.mat}
+                to={`/loja${m.query}`}
                 className="category-card"
+                style={{ '--mat-color': m.color }}
               >
-                <span className="category-card-icon">{cat.icon}</span>
+                <span className="category-card-icon">{m.icon}</span>
                 <div className="category-card-info">
-                  <span className="category-card-label">{cat.label.toUpperCase()}</span>
-                  <span className="category-card-desc">{cat.desc}</span>
+                  <span className="category-card-label">{m.mat.toUpperCase()}</span>
+                  <span className="category-card-desc">{m.desc}</span>
                 </div>
                 <span className="category-card-arrow">›</span>
               </Link>
@@ -104,7 +101,7 @@ export default function HomePage() {
       </section>
 
       {/* ── Em Destaque ── */}
-      <section className="home-featured">
+      <section className="home-featured" id="produtos">
         <div className="container">
           <div className="home-section-header">
             <div>
@@ -121,28 +118,30 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Oferta Relâmpago ── */}
-      <section className="flash-sale">
+      {/* ── Por que nossa Forja ── */}
+      <section className="why-section">
         <div className="container">
-          <div className="flash-sale-inner">
-            <div className="flash-sale-content">
-              <div className="flash-sale-chip">
-                <span className="flash-sale-chip-icon">⚡</span>
-                <span>OFERTA RELÂMPAGO</span>
-              </div>
-              <p className="flash-sale-percent">30% OFF</p>
-              <p className="flash-sale-subtitle">em Miniaturas</p>
-              <p className="flash-sale-coupon-label">Use o cupom no checkout:</p>
-              <div className="flash-sale-coupon">MINI30</div>
-              <div className="flash-sale-actions">
-                <Link to="/loja?cat=figuras" className="btn btn-primary">
-                  GARANTE AGORA →
-                </Link>
-                <span className="flash-sale-stock">
-                  <span className="flash-sale-dot" />
-                  Estoque limitado
-                </span>
-              </div>
+          <div className="why-header">
+            <p className="home-section-eyebrow">🎲 ARTESANATO ÉPICO</p>
+            <h2 className="home-section-title">
+              Por que <span className="home-title-accent">nossos dados</span>?
+            </h2>
+          </div>
+          <div className="why-grid">
+            <div className="why-card">
+              <div className="why-card-icon">🎨</div>
+              <h3>Cada Dado é Único</h3>
+              <p>Resina artesanal fundida à mão: sem dois dados iguais. Veios, bolhas e cores criam peças exclusivas que não existem em nenhuma outra mesa.</p>
+            </div>
+            <div className="why-card">
+              <div className="why-card-icon">⚖️</div>
+              <h3>Peso e Equilíbrio</h3>
+              <p>Metal sólido, pedra polida e madeira densa com centro de massa calibrado. Rolagens justas e resultado confiável em qualquer superfície.</p>
+            </div>
+            <div className="why-card">
+              <div className="why-card-icon">🏰</div>
+              <h3>Feitos para Durar</h3>
+              <p>Materiais premium que envelhecem com dignidade. Seus dados atravessarão campanhas, décadas e serão passados adiante como relíquias de aventura.</p>
             </div>
           </div>
         </div>
@@ -182,10 +181,10 @@ export default function HomePage() {
               </div>
             </div>
             <div className="benefit-item">
-              <div className="benefit-icon-box">🔒</div>
+              <div className="benefit-icon-box">🎲</div>
               <div className="benefit-text">
-                <h4>Pagamento Seguro</h4>
-                <p>SSL e proteção total contra fraude em todas as compras</p>
+                <h4>Pagamento via Pix</h4>
+                <p>Pague com Pix e receba confirmação imediata do seu pedido</p>
               </div>
             </div>
           </div>
