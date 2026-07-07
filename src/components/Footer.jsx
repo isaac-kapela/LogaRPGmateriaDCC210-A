@@ -25,18 +25,17 @@ export default function Footer() {
                 <span>FORJA<span className="logo-accent">RPG</span></span>
               </div>
               <p className="footer-tagline">
-                Equipando aventureiros desde 2018. A maior loja
-                especializada em RPG do Brasil.
+                Kits temáticos em resina e metal sólido.
+                Dados exclusivos para adventureiros.
               </p>
             </div>
 
             <div className="footer-col">
-              <h4>Categorias</h4>
+              <h4>Produtos</h4>
               <ul>
-                <li><a href="#produtos">Dados</a></li>
-                <li><a href="#produtos">Livros</a></li>
-                <li><a href="#produtos">Miniaturas</a></li>
-                <li><a href="#produtos">Acessórios</a></li>
+                <li><a href="/loja?mat=Resina">Resina</a></li>
+                <li><a href="/loja?mat=Metal">Metal</a></li>
+                <li><a href="/loja">Ver Todos</a></li>
               </ul>
             </div>
 
