@@ -65,12 +65,23 @@ export default function Hero() {
         </div>
 
         <div className="hero-visual" aria-hidden="true">
-          <div className="hero-dice-orbit">
-            <div className="hero-dice-main">🎲</div>
-            <div className="hero-dice-orbit-item hero-dice-orbit-1">✨</div>
-            <div className="hero-dice-orbit-item hero-dice-orbit-2">⚙</div>
-            <div className="hero-dice-orbit-item hero-dice-orbit-3">🔥</div>
-            <div className="hero-dice-orbit-item hero-dice-orbit-4">🛡</div>
+          <div className="hero-visual-inner">
+            <div className="hero-kits-grid">
+              {[
+                { src: '/kits/chama-arcana.jpeg',     label: 'Chama Arcana',     icon: '🔥' },
+                { src: '/kits/arauto-do-abismo.jpeg', label: 'Arauto do Abismo', icon: '🐙' },
+                { src: '/kits/senhor-da-forja.jpeg',  label: 'Senhor da Forja',  icon: '⚒' },
+                { src: '/kits/egide-celestial.jpeg',  label: 'Égide Celestial',  icon: '✨' },
+              ].map((kit, i) => (
+                <div key={i} className="hero-kit-card">
+                  <img src={kit.src} alt={kit.label} className="hero-kit-img" />
+                  <div className="hero-kit-overlay">
+                    <span className="hero-kit-icon">{kit.icon}</span>
+                    <span className="hero-kit-label">{kit.label}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -85,10 +96,6 @@ export default function Hero() {
         <div className="hero-stat">
           <strong>2</strong>
           <span>Materiais</span>
-        </div>
-        <div className="hero-stat">
-          <strong>12.000+</strong>
-          <span>Clientes</span>
         </div>
         <div className="hero-stat">
           <strong>4.9 ★</strong>
